@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "StaticPages" do
+describe "Static Pages" do
 
   describe "Home Page" do
 
@@ -17,5 +17,12 @@ describe "StaticPages" do
       expect(page).to have_content('Help')
     end
   end
-  
+
+  describe "About page" do
+    it "Should have content 'About'" do
+      visit '/static_pages/about'
+      expect(page).to have_content('About')
+    end
+  end
+
 end
