@@ -8,6 +8,11 @@ describe "Static Pages" do
       visit '/static_pages/home'
       expect(page).to have_content('Sample App')
     end
+
+    it "Should have title 'Home'" do
+      visit '/static_pages/home'
+      expect(page).to have_title('Ruby on Rails Tutorial Sample App | Home')
+    end
   end
 
   describe "Help page" do
