@@ -16,6 +16,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'minitest'
   gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '2.1.0'
 end
