@@ -5,17 +5,17 @@ describe "Static Pages" do
   describe "Home Page" do
 
     it "Should have content 'Sample App'" do
-      visit '/static_pages/home'
+      visit root_path
       expect(page).to have_content('Sample App')
     end
 
     it "should have the base title" do
-      visit '/static_pages/home'
+      visit root_path
       expect(page).to have_title("Ruby on Rails Tutorial Sample App")
     end
 
     it "should not have a custom page title" do
-      visit '/static_pages/home'
+      visit root_path
       expect(page).not_to have_title('| Home')
     end
   end
@@ -23,12 +23,12 @@ describe "Static Pages" do
   describe "Help page" do
 
     it "Should have content 'Help'" do
-      visit '/static_pages/help'
+      visit help_path
       expect(page).to have_content('Help')
     end
 
     it "Should have title 'Help'" do
-      visit '/static_pages/help'
+      visit help_path
       expect(page).to have_title("#{base_title} | Help")
     end
   end
@@ -36,25 +36,25 @@ describe "Static Pages" do
   describe "About page" do
 
     it "Should have content 'About'" do
-      visit '/static_pages/about'
+      visit about_path
       expect(page).to have_content('About')
     end
 
     it "Should have title 'About'" do
-      visit '/static_pages/about'
+      visit about_path
       expect(page).to have_title("#{base_title} | About")
     end
   end
 
-  describe "Contacts page" do
+  describe "Contact page" do
 
     it "Should have content 'Contact'" do
-      visit '/static_pages/contact'
-      expect(page).to have_content('Contacts')    
+      visit contact_path
+      expect(page).to have_content  ('Contacts')    
     end
 
     it "Should have title 'Contact'" do
-      visit '/static_pages/contact'
+      visit contact_path
       expect(page).to have_title("#{base_title} | Contact")
     end
   end
