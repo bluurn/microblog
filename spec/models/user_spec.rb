@@ -26,7 +26,7 @@ describe User do
 
   describe "when email format should be valid" do
     it "should be valid" do
-      
+
       addresses = %w[some@company,com company.com some@company+sample.com]
 
       addresses.each do |invalid_address|
@@ -39,11 +39,20 @@ describe User do
   describe "when email format should not be valid" do
     it "should not be valid" do
       addresses = %w[bluurn@gmail.com bluurn2@gmail.com]
-      
+
       addresses.each do |valid_address|
         @user.email = valid_address
         expect(@user).to be_valid 
       end
     end
+  end
+
+  describe "when an email address is already taken" do
+    before do
+      user_with_same_email = @user.dup
+      user_with_same_email.save
+    end
+    
+    it { should_not be_valid }
   end
 end
