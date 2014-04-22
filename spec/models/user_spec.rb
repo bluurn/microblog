@@ -50,6 +50,7 @@ describe User do
   describe "when an email address is already taken" do
     before do
       user_with_same_email = @user.dup
+      user_with_same_email.email.upcase!
       user_with_same_email.save
     end
     
