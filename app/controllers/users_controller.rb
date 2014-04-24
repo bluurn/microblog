@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :signed_in_user, only: [:index, :edit, :update]
 
   def new
     @user = User.new
@@ -26,6 +27,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def signed_in_user 
+      redirect_to signin_path, notice: "Please, sign in" unless signed_in?
+    end
 
     def set_user
       @user = User.find(params[:id])
