@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
-  before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update]
 
   def index
@@ -30,6 +30,15 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def destroy
+    if @user.destroy
+      flash[:success] = 'User deleted'
+    else  
+      flash[:error] = 'Cannot delete this user'
+    end
+    redirect_to users_url  
   end
 
   private
