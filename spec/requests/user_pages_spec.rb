@@ -73,26 +73,9 @@ describe "User pages" do
 
       it { should have_title(new_name) }
       it { should have_selector('div.alert.alert-success') }
-      # FIXME: it breaks test
-      # it { should have_link('Sign out') }
+      it { should have_link('Sign out') }
       specify { expect(user.reload.name).to eq new_name }
       specify { expect(user.reload.email).to eq new_email }
-    end
-  end
-  describe "authorization" do
-    describe "for non-signed-in users" do
-      let(:user) { FactoryGirl.create(:user) }
-
-      describe "in the Users controller" do
-        describe "visiting the edit page" do
-          before { visit edit_user_path(user) }
-          it {should have_title('Sign in')}
-        end
-        describe "submitting an update action" do
-          before { patch user_path(user) }
-          specify { expect(response).to redirect_to(signin_path) }
-        end
-      end
     end
   end
 end
