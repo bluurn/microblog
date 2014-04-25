@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+    @microposts = @user.microposts.paginate(page: params[:page])  
+  end
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -46,13 +50,6 @@ class UsersController < ApplicationController
 
     def admin_user
       redirect_to(root_url) unless current_user.admin?  
-    end
-
-    def signed_in_user 
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please, sign in"
-      end
     end
 
     def correct_user
