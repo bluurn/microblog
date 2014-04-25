@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   before_create :create_remember_token
 
   has_secure_password
-  has_many :microposts
+  has_many :microposts, dependent: :destroy
 
 
   def User.new_remember_token
