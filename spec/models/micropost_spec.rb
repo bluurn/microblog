@@ -16,4 +16,12 @@ describe Micropost do
     before { @micropost.user_id = nil }
     it { should_not be_valid }
   end
+  describe "with empty content" do
+    before { @micropost.content = '' }
+    it { should_not be_valid }
+  end
+  describe "with content longer than 140 symbols" do
+    before { @micropost.content = 'a' * 141 }
+    it { should_not be_valid}
+  end
 end
