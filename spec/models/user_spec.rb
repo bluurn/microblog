@@ -137,5 +137,13 @@ describe User do
         expect(Micropost.where(id: micropost.id)).to be_empty 
       end  
     end
+
+    describe "status" do
+      let(:unfollowed_post) { FactoryGirl.create(:micropost, user: user, content: 'Lorem') }  
+
+      its(:feed) { should include(newer_micropost) }
+      its(:feed) { should_not include(older_micropost) }
+      its(:feed) { should_not include(unfollowed_post) }
+    end
   end
 end
