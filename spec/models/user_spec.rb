@@ -139,10 +139,10 @@ describe User do
     end
 
     describe "status" do
-      let(:unfollowed_post) { FactoryGirl.create(:micropost, user: user, content: 'Lorem') }  
+      let(:unfollowed_post) { FactoryGirl.create(:micropost, user: FactoryGirl.create(:user), content: 'Lorem') }  
 
       its(:feed) { should include(newer_micropost) }
-      its(:feed) { should_not include(older_micropost) }
+      its(:feed) { should include(older_micropost) }
       its(:feed) { should_not include(unfollowed_post) }
     end
   end
