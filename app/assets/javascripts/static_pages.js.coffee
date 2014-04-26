@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 jQuery ->
 	$('#micropost_content').on 'keyup change', (e) ->
-		max = 140
 		elt = $ e.target
+		max = elt.attr 'maxlength'
 		left = max - elt.val().length
 		chars_left = $ '#chars_left'
 		if left >= 0
