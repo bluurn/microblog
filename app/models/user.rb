@@ -31,16 +31,16 @@ class User < ActiveRecord::Base
     through: :reverse_relationships
 
 
-  def User.new_remember_token
+  def self.new_remember_token
     SecureRandom.urlsafe_base64
   end
 
-  def User.digest(token)
+  def self.digest(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
 
   def feed
-    Micropost.where('user_id = ?', id)
+    Micropost.from_users_followed_by(self)
   end
 
   def follow!(other_user)
