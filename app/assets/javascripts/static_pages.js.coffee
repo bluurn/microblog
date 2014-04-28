@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+# FIXME: handle cut and paste from contextmenu
 jQuery ->
 	$('#micropost_content').on 'keyup change', (e) ->
 		elt = $ e.target

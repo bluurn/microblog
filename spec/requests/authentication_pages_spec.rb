@@ -39,7 +39,7 @@ describe "Authentication" do
 
         describe "when he tries to visit a protected page" do
           before do
-            visit edit_user_path(user)              
+            visit edit_user_path(user)
             fill_in "Email", with: user.email
             fill_in "Password", with: user.password
             click_button "Sign in"
@@ -47,7 +47,7 @@ describe "Authentication" do
 
           describe "after signing in" do
             it "should render desired page" do
-              expect(page).to have_title 'Edit user'  
+              expect(page).to have_title 'Edit user'
             end
           end
         end
@@ -61,7 +61,15 @@ describe "Authentication" do
             specify { expect(response).to redirect_to(signin_path) }
           end
           describe "visiting index page" do
-            before { visit users_path }            
+            before { visit users_path }
+            it { should have_title('Sign in') }
+          end
+          describe "visiting the following page" do
+            before { visit following_user_path(user) }
+            it { should have_title('Sign in') }
+          end
+          describe "visiting the followers page" do
+            before { visit followers_user_path(user) }
             it { should have_title('Sign in') }
           end
         end
@@ -73,6 +81,17 @@ describe "Authentication" do
           end
           describe "submitting to the destroy action" do
             before { delete micropost_path(FactoryGirl.create(:micropost, user: user, content: 'Lorem')) }
+            specify { expect(response).to redirect_to(signin_path) }
+          end
+        end
+        describe "in the Relationships controller" do
+          describe "submitting to the create action" do
+            before { post relationships_path }
+            specify { expect(response).to redirect_to(signin_path) }
+          end
+
+          describe "submitting to the destroy action" do
+            before { delete relationship_path(1) }
             specify { expect(response).to redirect_to(signin_path) }
           end
         end
@@ -103,7 +122,7 @@ describe "Authentication" do
           before { delete user_path(user) }
           specify { expect(response).to redirect_to(root_url) }
         end
-        
+
       end
     end
   end
